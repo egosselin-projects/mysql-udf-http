@@ -99,7 +99,7 @@ networks:
 services:
   database:
     build: ./docker
-    image: mysql-http
+    image: mysql-http-udf
     tty: true
     container_name: database
     volumes:
@@ -170,6 +170,9 @@ if [ -n "$MYSQL_ROOT_PASSWORD" ] ; then
 		CREATE USER 'root'@'%' IDENTIFIED BY '${MYSQL_ROOT_PASSWORD}' ;
 		GRANT ALL ON *.* TO 'root'@'%' WITH GRANT OPTION ;
 		FLUSH PRIVILEGES ;
+
+		-- default database
+		create database if not exists ${MYSQL_DATABASE};
 
         -- registering custom rest functions
         create function http_get returns string soname 'mysql-udf-http.so';
