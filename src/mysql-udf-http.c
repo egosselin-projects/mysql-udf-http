@@ -162,7 +162,7 @@ char *http_post(UDF_INIT *initid, UDF_ARGS *args,
   {
     struct curl_slist *chunk = NULL;
     chunk = curl_slist_append(chunk, "Expect:");
-    chunk = curl_slist_append(chunk, "Content-Type:application/json");   
+    chunk = curl_slist_append(chunk, "Content-Type:application/json");
   
     curl_easy_setopt(curl, CURLOPT_URL, args->args[0]);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, result_cb);
@@ -237,7 +237,8 @@ char *http_put(UDF_INIT *initid, UDF_ARGS *args,
   if (curl)
   {
     struct curl_slist *chunk = NULL;
-    chunk = curl_slist_append(chunk, "Expect:");  
+    chunk = curl_slist_append(chunk, "Expect:");
+    chunk = curl_slist_append(chunk, "Content-Type:application/json");  
   
     curl_easy_setopt(curl, CURLOPT_URL, args->args[0]);
     curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, result_cb);
